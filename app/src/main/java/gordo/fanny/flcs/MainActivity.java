@@ -7,11 +7,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.squareup.otto.Subscribe;
 
 public class MainActivity extends FLCSBaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -21,7 +24,7 @@ public class MainActivity extends FLCSBaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                bus.post("HI");
             }
         });
     }
@@ -46,5 +49,10 @@ public class MainActivity extends FLCSBaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Subscribe
+    public void onTest(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }

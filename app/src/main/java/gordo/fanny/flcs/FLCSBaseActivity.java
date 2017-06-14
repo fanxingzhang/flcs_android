@@ -5,6 +5,10 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.squareup.otto.Bus;
+
+import javax.inject.Inject;
+
 import gordo.fanny.flcs.services.FLCSRetrofitBuilder;
 import gordo.fanny.flcs.services.FLCSService;
 import retrofit2.Retrofit;
@@ -15,14 +19,30 @@ import retrofit2.Retrofit;
 
 public class FLCSBaseActivity extends AppCompatActivity {
 
+    @Inject
+    Bus bus;
 
     protected FLCSService flcsService;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ((FLCSApplication)getApplication()).getDataComponent().inject(this);
 
         Retrofit retrofit = FLCSRetrofitBuilder.getRetrofit();
         flcsService = retrofit.create(FLCSService.class);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        bus.register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        bus.register(this);
     }
 }
