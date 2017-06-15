@@ -8,4 +8,8 @@ public class LeagueInfo {
 
     private long id;
     private String name;
+
+    public String getName() {
+        return name;
+    }
 }

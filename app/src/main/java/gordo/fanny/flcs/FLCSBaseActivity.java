@@ -22,16 +22,13 @@ public class FLCSBaseActivity extends AppCompatActivity {
     @Inject
     Bus bus;
 
-    protected FLCSService flcsService;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ((FLCSApplication)getApplication()).getDataComponent().inject(this);
-
-        Retrofit retrofit = FLCSRetrofitBuilder.getRetrofit();
-        flcsService = retrofit.create(FLCSService.class);
     }
 
     @Override

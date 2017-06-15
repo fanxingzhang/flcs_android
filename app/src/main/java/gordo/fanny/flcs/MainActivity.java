@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
 
+import gordo.fanny.flcs.services.request.LeagueRequest;
+
 public class MainActivity extends FLCSBaseActivity {
 
     @Override
@@ -24,7 +26,7 @@ public class MainActivity extends FLCSBaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bus.post("HI");
+                bus.post(new LeagueRequest(1191481));
             }
         });
     }

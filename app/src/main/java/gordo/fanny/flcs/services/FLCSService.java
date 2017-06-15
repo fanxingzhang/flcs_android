@@ -10,6 +10,6 @@ import retrofit2.http.Path;
  */
 
 public interface FLCSService {
-    @GET("/api/league/{leagueId}")
+    @GET("/en-US/api/league/{leagueId}")
     Call<LeagueInfo> getLeagueInfo(@Path("leagueId") long leagueId);
 }
