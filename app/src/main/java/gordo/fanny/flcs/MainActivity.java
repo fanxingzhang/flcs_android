@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.squareup.otto.Subscribe;
 
 import gordo.fanny.flcs.services.request.LeagueRequest;
+import gordo.fanny.flcs.services.response.LeagueInfo;
 
 public class MainActivity extends FLCSBaseActivity {
 
@@ -54,7 +55,7 @@ public class MainActivity extends FLCSBaseActivity {
     }
 
     @Subscribe
-    public void onTest(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    public void onLeagueInfo(LeagueInfo leagueInfo) {
+        Toast.makeText(this, leagueInfo.getName(), Toast.LENGTH_SHORT).show();
     }
 }

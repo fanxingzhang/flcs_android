@@ -44,7 +44,7 @@ public class FLCSServiceManager {
         call.enqueue(new Callback<LeagueInfo>() {
             @Override
             public void onResponse(Call<LeagueInfo> call, Response<LeagueInfo> response) {
-                System.out.println("Success!! " + response.body().getName());
+                bus.post(response.body());
             }
 
             @Override
