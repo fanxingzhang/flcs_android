@@ -15,4 +15,8 @@ public class FantasyMatch {
     public long getWeek() {
         return week;
     }
+
+    public long getId() {
+        return id;
+    }
 }

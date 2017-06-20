@@ -9,6 +9,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import gordo.fanny.flcs.data.FantasyInfoManager;
 import gordo.fanny.flcs.services.FLCSBus;
 
 /**
@@ -27,5 +28,11 @@ public class DataModule {
     @Singleton
     Bus ottoBus() {
         return new FLCSBus(ThreadEnforcer.ANY);
+    }
+
+    @Provides
+    @Singleton
+    FantasyInfoManager fantasyInfoManager() {
+        return new FantasyInfoManager();
     }
 }

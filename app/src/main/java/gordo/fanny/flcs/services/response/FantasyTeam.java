@@ -16,4 +16,8 @@ public class FantasyTeam {
     public String getName() {
         return name;
     }
+
+    public String getSummonerName() {
+        return summonerName;
+    }
 }

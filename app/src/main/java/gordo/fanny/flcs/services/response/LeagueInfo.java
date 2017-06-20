@@ -1,7 +1,9 @@
 package gordo.fanny.flcs.services.response;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rww306 on 2017-06-13.
@@ -35,22 +37,11 @@ public class LeagueInfo {
         return size;
     }
 
-    public List<FantasyMatch> getCurrentWeekMatches() {
-        List<FantasyMatch> currWeekMatches = new ArrayList<>();
-        for (FantasyMatch fm : fantasyMatches) {
-            if (fm.getWeek() == currentWeek) {
-                currWeekMatches.add(fm);
-            }
-        }
-        return currWeekMatches;
+    public List<FantasyTeam> getFantasyTeams() {
+        return fantasyTeams;
     }
 
-    public String getFantasyTeamNameById(long id) {
-        for (FantasyTeam ft : fantasyTeams) {
-            if (ft.getId() == id) {
-                return ft.getName();
-            }
-        }
-        return null;
+    public List<FantasyMatch> getFantasyMatches() {
+        return fantasyMatches;
     }
 }

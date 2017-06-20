@@ -61,8 +61,6 @@ public class MainActivity extends FLCSBaseActivity {
 
     @Subscribe
     public void onLeagueInfo(LeagueInfo leagueInfo) {
-        FantasyMatch fm = leagueInfo.getCurrentWeekMatches().get(0);
-        Toast.makeText(this, "" + leagueInfo.getFantasyTeamNameById(fm.redTeam.getId())
-                 + " vs " + leagueInfo.getFantasyTeamNameById(fm.blueTeam.getId()), Toast.LENGTH_SHORT).show();
+
     }
 }
