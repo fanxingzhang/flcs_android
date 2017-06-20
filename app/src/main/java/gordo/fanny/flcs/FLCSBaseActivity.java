@@ -42,6 +42,6 @@ public class FLCSBaseActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        bus.register(this);
+        bus.unregister(this);
     }
 }
