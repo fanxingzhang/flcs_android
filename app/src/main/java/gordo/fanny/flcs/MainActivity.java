@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
@@ -16,6 +17,9 @@ import gordo.fanny.flcs.services.response.FantasyMatch;
 import gordo.fanny.flcs.services.response.LeagueInfo;
 
 public class MainActivity extends FLCSBaseActivity {
+
+    private ListView matchupListVivew;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
