@@ -18,6 +18,7 @@ public class FantasyInfoManager {
 
     private List<RosterInfo> rosters;
     private List<MatchUpInfo> matchUps;
+    private long currWeek;
 
     public FantasyInfoManager() {
         rosters = new ArrayList<>();
@@ -25,6 +26,8 @@ public class FantasyInfoManager {
     }
 
     public void setInfo(LeagueInfo info) {
+        currWeek = info.getCurrentWeek();
+
         List<FantasyTeam> fantasyTeams = info.getFantasyTeams();
         rosters.clear();
         for (FantasyTeam ft : fantasyTeams) {
@@ -58,5 +61,19 @@ public class FantasyInfoManager {
 
     public List<MatchUpInfo> getMatchUps() {
         return matchUps;
+    }
+
+    public List<MatchUpInfo> getMatchUpsByWeek(long week) {
+        List<MatchUpInfo> returnMatchUps = new ArrayList<>();
+        for (MatchUpInfo matchUpInfo : matchUps) {
+            if (matchUpInfo.getWeek() == week) {
+                returnMatchUps.add(matchUpInfo);
+            }
+        }
+        return returnMatchUps;
+    }
+
+    public List<MatchUpInfo> getCurrWeekMatchUps() {
+        return getMatchUpsByWeek(currWeek);
     }
 }

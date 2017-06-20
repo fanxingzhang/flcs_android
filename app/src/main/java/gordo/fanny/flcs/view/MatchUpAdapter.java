@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class MatchUpAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return fantasyInfoManager.getMatchUps().size();
+        return fantasyInfoManager.getCurrWeekMatchUps().size();
     }
 
     @Override
@@ -52,12 +54,16 @@ public class MatchUpAdapter extends BaseAdapter {
         }
         TextView blueTeamName = (TextView) viewToUse.findViewById(R.id.matchup_team_1_name);
         TextView redTeamName = (TextView) viewToUse.findViewById(R.id.matchup_team_2_name);
+        TextView blueSummonerName = (TextView) viewToUse.findViewById(R.id.matchup_team_1_summoner);
+        TextView redSummonerName = (TextView) viewToUse.findViewById(R.id.matchup_team_2_summoner);
 
-        MatchUpInfo matchUps = fantasyInfoManager.getMatchUps().get(position);
+        MatchUpInfo matchUps = fantasyInfoManager.getCurrWeekMatchUps().get(position);
         RosterInfo blueRoster = fantasyInfoManager.getRosterById(matchUps.getBlueTeamId());
         RosterInfo redRoster = fantasyInfoManager.getRosterById(matchUps.getRedTeamId());
         blueTeamName.setText(blueRoster.getName());
         redTeamName.setText(redRoster.getName());
+        blueSummonerName.setText(blueRoster.getSummonerName());
+        redSummonerName.setText(redRoster.getSummonerName());
         return viewToUse;
     }
 
@@ -73,6 +79,5 @@ public class MatchUpAdapter extends BaseAdapter {
 
     public void update() {
         notifyDataSetChanged();
-        Log.d("ADAPTER", "update: " + fantasyInfoManager.getMatchUps().size());
     }
 }

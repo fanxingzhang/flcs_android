@@ -27,7 +27,7 @@ public class RosterInfo {
     }
 
     public String getName() {
-        return name;
+        return name.toUpperCase();
     }
 
     public String getSummonerName() {
