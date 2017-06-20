@@ -2,15 +2,23 @@ package gordo.fanny.flcs.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import gordo.fanny.flcs.FLCSApplication;
 import gordo.fanny.flcs.R;
+import gordo.fanny.flcs.data.FantasyInfoManager;
+import gordo.fanny.flcs.data.MatchUpInfo;
+import gordo.fanny.flcs.data.RosterInfo;
 import gordo.fanny.flcs.services.response.FantasyMatch;
 
 /**
@@ -19,19 +27,21 @@ import gordo.fanny.flcs.services.response.FantasyMatch;
 
 public class MatchUpAdapter extends BaseAdapter {
 
+    @Inject
+    FantasyInfoManager fantasyInfoManager;
+
     private Context context;
-    private List<FantasyMatch> fantasyMatchList;
     private static LayoutInflater mInflater;
 
     public MatchUpAdapter(Activity mActivity) {
         context = mActivity;
-        fantasyMatchList = new ArrayList<>();
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        FLCSApplication.getApp().getDataComponent().inject(this);
     }
 
     @Override
     public int getCount() {
-        return fantasyMatchList.size();
+        return fantasyInfoManager.getMatchUps().size();
     }
 
     @Override
@@ -40,8 +50,14 @@ public class MatchUpAdapter extends BaseAdapter {
         if (viewToUse == null) {
             viewToUse = mInflater.inflate(R.layout.match_up_row_layout, parent, false);
         }
-        FantasyMatch currentMatchup = fantasyMatchList.get(position);
+        TextView blueTeamName = (TextView) viewToUse.findViewById(R.id.matchup_team_1_name);
+        TextView redTeamName = (TextView) viewToUse.findViewById(R.id.matchup_team_2_name);
 
+        MatchUpInfo matchUps = fantasyInfoManager.getMatchUps().get(position);
+        RosterInfo blueRoster = fantasyInfoManager.getRosterById(matchUps.getBlueTeamId());
+        RosterInfo redRoster = fantasyInfoManager.getRosterById(matchUps.getRedTeamId());
+        blueTeamName.setText(blueRoster.getName());
+        redTeamName.setText(redRoster.getName());
         return viewToUse;
     }
 
@@ -55,10 +71,8 @@ public class MatchUpAdapter extends BaseAdapter {
         return null;
     }
 
-    public void setData(List<FantasyMatch> matchList) {
-        fantasyMatchList.clear();
-        fantasyMatchList.addAll(matchList);
+    public void update() {
         notifyDataSetChanged();
+        Log.d("ADAPTER", "update: " + fantasyInfoManager.getMatchUps().size());
     }
-
 }

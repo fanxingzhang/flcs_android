@@ -43,6 +43,7 @@ public class FantasyInfoManager {
             matchUpInfo.setWeek(fm.getWeek());
             matchUpInfo.setBlueTeamId(fm.blueTeam.getId());
             matchUpInfo.setRedTeamId(fm.redTeam.getId());
+            matchUps.add(matchUpInfo);
         }
     }
 
@@ -53,5 +54,9 @@ public class FantasyInfoManager {
             }
         }
         return null;
+    }
+
+    public List<MatchUpInfo> getMatchUps() {
+        return matchUps;
     }
 }

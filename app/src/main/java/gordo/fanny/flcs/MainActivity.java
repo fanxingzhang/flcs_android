@@ -30,6 +30,10 @@ public class MainActivity extends FLCSBaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        matchupListVivew = (ListView) findViewById(R.id.match_up_list_view);
+        matchUpAdapter = new MatchUpAdapter(this);
+        matchupListVivew.setAdapter(matchUpAdapter);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,5 +68,6 @@ public class MainActivity extends FLCSBaseActivity {
     @Subscribe
     public void onLeagueInfo(LeagueInfo leagueInfo) {
         fantasyInfoManager.setInfo(leagueInfo);
+        matchUpAdapter.update();
     }
 }
