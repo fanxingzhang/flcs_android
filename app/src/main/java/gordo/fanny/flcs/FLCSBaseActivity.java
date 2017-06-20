@@ -9,6 +9,7 @@ import com.squareup.otto.Bus;
 
 import javax.inject.Inject;
 
+import gordo.fanny.flcs.data.FantasyInfoManager;
 import gordo.fanny.flcs.services.FLCSRetrofitBuilder;
 import gordo.fanny.flcs.services.FLCSService;
 import retrofit2.Retrofit;
@@ -22,7 +23,8 @@ public class FLCSBaseActivity extends AppCompatActivity {
     @Inject
     Bus bus;
 
-
+    @Inject
+    FantasyInfoManager fantasyInfoManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

@@ -15,10 +15,12 @@ import com.squareup.otto.Subscribe;
 import gordo.fanny.flcs.services.request.LeagueRequest;
 import gordo.fanny.flcs.services.response.FantasyMatch;
 import gordo.fanny.flcs.services.response.LeagueInfo;
+import gordo.fanny.flcs.view.MatchUpAdapter;
 
 public class MainActivity extends FLCSBaseActivity {
 
     private ListView matchupListVivew;
+    private MatchUpAdapter matchUpAdapter;
 
 
     @Override
@@ -61,6 +63,6 @@ public class MainActivity extends FLCSBaseActivity {
 
     @Subscribe
     public void onLeagueInfo(LeagueInfo leagueInfo) {
-
+        fantasyInfoManager.setInfo(leagueInfo);
     }
 }
