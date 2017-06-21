@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
 
+import gordo.fanny.flcs.services.request.LCSRequest;
 import gordo.fanny.flcs.services.request.LeagueRequest;
 import gordo.fanny.flcs.services.response.FantasyMatch;
+import gordo.fanny.flcs.services.response.LCSInfo;
 import gordo.fanny.flcs.services.response.LeagueInfo;
 import gordo.fanny.flcs.view.MatchUpAdapter;
 
@@ -63,6 +65,12 @@ public class MainActivity extends FLCSBaseActivity {
     @Subscribe
     public void onLeagueInfo(LeagueInfo leagueInfo) {
         fantasyInfoManager.setInfo(leagueInfo);
+        bus.post(new LCSRequest(15));
+    }
+
+    @Subscribe
+    public void onLCSInfo(LCSInfo lcsInfo) {
+        fantasyInfoManager.setLCSInfo(lcsInfo);
         matchUpAdapter.update();
     }
 }

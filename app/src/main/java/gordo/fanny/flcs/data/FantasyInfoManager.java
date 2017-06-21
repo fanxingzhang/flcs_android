@@ -10,6 +10,8 @@ import javax.inject.Singleton;
 import gordo.fanny.flcs.services.response.FantasyMatch;
 import gordo.fanny.flcs.services.response.FantasyMatchTeamRoster;
 import gordo.fanny.flcs.services.response.FantasyTeam;
+import gordo.fanny.flcs.services.response.LCSInfo;
+import gordo.fanny.flcs.services.response.LCSPlayers;
 import gordo.fanny.flcs.services.response.LeagueInfo;
 
 /**
@@ -21,11 +23,13 @@ public class FantasyInfoManager {
 
     private Map<Long, RosterInfo> rosters;
     private List<MatchUpInfo> matchUps;
+    private Map<Long, ProPlayer> proPlayerMap;
     private long currWeek;
 
     public FantasyInfoManager() {
         rosters = new HashMap<>();
         matchUps = new ArrayList<>();
+        proPlayerMap = new HashMap<>();
     }
 
     public void setInfo(LeagueInfo info) {
@@ -65,14 +69,36 @@ public class FantasyInfoManager {
             blueWeeklyRoster.setSupp(fantasyBlueRoster.getSUPPORT().get(0).getTargetId());
 
             redWeeklyRoster.setTop(fantasyRedRoster.getTOP_LANE().get(0).getTargetId());
+            redWeeklyRoster.setJug(fantasyRedRoster.getJUNGLER().get(0).getTargetId());
+            redWeeklyRoster.setMid(fantasyRedRoster.getMID_LANE().get(0).getTargetId());
+            redWeeklyRoster.setAdc(fantasyRedRoster.getAD_CARRY().get(0).getTargetId());
+            redWeeklyRoster.setSupp(fantasyRedRoster.getSUPPORT().get(0).getTargetId());
 
             blueRoster.addWeeklyRoster(fm.getWeek(), blueWeeklyRoster);
             redRoster.addWeeklyRoster(fm.getWeek(), redWeeklyRoster);
         }
     }
 
+    public void setLCSInfo(LCSInfo lcsInfo) {
+        List<LCSPlayers> lcsPlayersList = lcsInfo.getProPlayers();
+        for (LCSPlayers players : lcsPlayersList) {
+            ProPlayer proPlayer = new ProPlayer();
+            proPlayer.setId(players.getId());
+            proPlayer.setName(players.getName());
+            proPlayer.setPhotoUrl(players.getPhotoUrl());
+            proPlayer.setProTeamId(players.getProTeamId());
+            proPlayer.setRiotId(players.getRiotId());
+
+            proPlayerMap.put(proPlayer.getId(), proPlayer);
+        }
+    }
+
     public RosterInfo getRosterById(long id) {
         return rosters.get(id);
+    }
+
+    public ProPlayer getPlayerById(long id) {
+        return proPlayerMap.get(id);
     }
 
     public List<MatchUpInfo> getMatchUps() {

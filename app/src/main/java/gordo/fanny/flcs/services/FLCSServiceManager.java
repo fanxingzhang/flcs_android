@@ -9,7 +9,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import gordo.fanny.flcs.FLCSApplication;
+import gordo.fanny.flcs.services.request.LCSRequest;
 import gordo.fanny.flcs.services.request.LeagueRequest;
+import gordo.fanny.flcs.services.response.LCSInfo;
 import gordo.fanny.flcs.services.response.LeagueInfo;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +51,22 @@ public class FLCSServiceManager {
 
             @Override
             public void onFailure(Call<LeagueInfo> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Subscribe
+    public void onLCSRequest(LCSRequest r) {
+        Call<LCSInfo> call = flcsService.getLCSInfo(r.getId());
+        call.enqueue(new Callback<LCSInfo>() {
+            @Override
+            public void onResponse(Call<LCSInfo> call, Response<LCSInfo> response) {
+                bus.post(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<LCSInfo> call, Throwable t) {
 
             }
         });

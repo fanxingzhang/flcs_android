@@ -21,6 +21,7 @@ import gordo.fanny.flcs.R;
 import gordo.fanny.flcs.data.FantasyInfoManager;
 import gordo.fanny.flcs.data.MatchUpInfo;
 import gordo.fanny.flcs.data.RosterInfo;
+import gordo.fanny.flcs.data.WeeklyRoster;
 import gordo.fanny.flcs.services.response.FantasyMatch;
 
 /**
@@ -68,7 +69,10 @@ public class MatchUpAdapter extends BaseAdapter {
         viewToUse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(blueRoster.getWeeklyRosters());
+//                System.out.println(blueRoster.getSummonerName());
+//                WeeklyRoster wr = blueRoster.getWeeklyRosters().get(Long.valueOf(1));
+//                System.out.println(fantasyInfoManager.getPlayerById(wr.getTop()).getName());
+//                System.out.println(fantasyInfoManager.getPlayerById(wr.getJug()).getName());
             }
         });
         return viewToUse;
