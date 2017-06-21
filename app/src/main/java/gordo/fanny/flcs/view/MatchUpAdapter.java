@@ -57,13 +57,20 @@ public class MatchUpAdapter extends BaseAdapter {
         TextView blueSummonerName = (TextView) viewToUse.findViewById(R.id.matchup_team_1_summoner);
         TextView redSummonerName = (TextView) viewToUse.findViewById(R.id.matchup_team_2_summoner);
 
-        MatchUpInfo matchUps = fantasyInfoManager.getCurrWeekMatchUps().get(position);
-        RosterInfo blueRoster = fantasyInfoManager.getRosterById(matchUps.getBlueTeamId());
+        final MatchUpInfo matchUps = fantasyInfoManager.getCurrWeekMatchUps().get(position);
+        final RosterInfo blueRoster = fantasyInfoManager.getRosterById(matchUps.getBlueTeamId());
         RosterInfo redRoster = fantasyInfoManager.getRosterById(matchUps.getRedTeamId());
         blueTeamName.setText(blueRoster.getName());
         redTeamName.setText(redRoster.getName());
         blueSummonerName.setText(blueRoster.getSummonerName());
         redSummonerName.setText(redRoster.getSummonerName());
+
+        viewToUse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println(blueRoster.getWeeklyRosters());
+            }
+        });
         return viewToUse;
     }
 

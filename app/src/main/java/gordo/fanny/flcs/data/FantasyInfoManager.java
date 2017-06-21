@@ -1,11 +1,14 @@
 package gordo.fanny.flcs.data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Singleton;
 
 import gordo.fanny.flcs.services.response.FantasyMatch;
+import gordo.fanny.flcs.services.response.FantasyMatchTeamRoster;
 import gordo.fanny.flcs.services.response.FantasyTeam;
 import gordo.fanny.flcs.services.response.LeagueInfo;
 
@@ -16,12 +19,12 @@ import gordo.fanny.flcs.services.response.LeagueInfo;
 @Singleton
 public class FantasyInfoManager {
 
-    private List<RosterInfo> rosters;
+    private Map<Long, RosterInfo> rosters;
     private List<MatchUpInfo> matchUps;
     private long currWeek;
 
     public FantasyInfoManager() {
-        rosters = new ArrayList<>();
+        rosters = new HashMap<>();
         matchUps = new ArrayList<>();
     }
 
@@ -35,7 +38,7 @@ public class FantasyInfoManager {
             rosterInfo.setId(ft.getId());
             rosterInfo.setName(ft.getName());
             rosterInfo.setSummonerName(ft.getSummonerName());
-            rosters.add(rosterInfo);
+            rosters.put(rosterInfo.getId(), rosterInfo);
         }
 
         List<FantasyMatch> fantasyMatches = info.getFantasyMatches();
@@ -47,16 +50,29 @@ public class FantasyInfoManager {
             matchUpInfo.setBlueTeamId(fm.blueTeam.getId());
             matchUpInfo.setRedTeamId(fm.redTeam.getId());
             matchUps.add(matchUpInfo);
+
+            RosterInfo blueRoster = rosters.get(matchUpInfo.getBlueTeamId());
+            RosterInfo redRoster = rosters.get(matchUpInfo.getRedTeamId());
+            WeeklyRoster blueWeeklyRoster = new WeeklyRoster();
+            WeeklyRoster redWeeklyRoster = new WeeklyRoster();
+            FantasyMatchTeamRoster fantasyBlueRoster = fm.blueTeam.getRoster();
+            FantasyMatchTeamRoster fantasyRedRoster = fm.redTeam.getRoster();
+
+            blueWeeklyRoster.setTop(fantasyBlueRoster.getTOP_LANE().get(0).getTargetId());
+            blueWeeklyRoster.setJug(fantasyBlueRoster.getJUNGLER().get(0).getTargetId());
+            blueWeeklyRoster.setMid(fantasyBlueRoster.getMID_LANE().get(0).getTargetId());
+            blueWeeklyRoster.setAdc(fantasyBlueRoster.getAD_CARRY().get(0).getTargetId());
+            blueWeeklyRoster.setSupp(fantasyBlueRoster.getSUPPORT().get(0).getTargetId());
+
+            redWeeklyRoster.setTop(fantasyRedRoster.getTOP_LANE().get(0).getTargetId());
+
+            blueRoster.addWeeklyRoster(fm.getWeek(), blueWeeklyRoster);
+            redRoster.addWeeklyRoster(fm.getWeek(), redWeeklyRoster);
         }
     }
 
     public RosterInfo getRosterById(long id) {
-        for (RosterInfo rosterInfo : rosters) {
-            if (rosterInfo.getId() == id) {
-                return rosterInfo;
-            }
-        }
-        return null;
+        return rosters.get(id);
     }
 
     public List<MatchUpInfo> getMatchUps() {
