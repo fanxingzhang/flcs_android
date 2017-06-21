@@ -105,6 +105,15 @@ public class FantasyInfoManager {
         return matchUps;
     }
 
+    public MatchUpInfo getMatchUpById(long id) {
+        for (MatchUpInfo matchUpInfo : matchUps) {
+            if (matchUpInfo.getId() == id) {
+                return matchUpInfo;
+            }
+        }
+        return null;
+    }
+
     public List<MatchUpInfo> getMatchUpsByWeek(long week) {
         List<MatchUpInfo> returnMatchUps = new ArrayList<>();
         for (MatchUpInfo matchUpInfo : matchUps) {

@@ -2,6 +2,7 @@ package gordo.fanny.flcs.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import gordo.fanny.flcs.FLCSApplication;
+import gordo.fanny.flcs.MatchUpActivity;
 import gordo.fanny.flcs.R;
+import gordo.fanny.flcs.Tags;
 import gordo.fanny.flcs.data.FantasyInfoManager;
 import gordo.fanny.flcs.data.MatchUpInfo;
 import gordo.fanny.flcs.data.RosterInfo;
@@ -59,7 +62,7 @@ public class MatchUpAdapter extends BaseAdapter {
         TextView redSummonerName = (TextView) viewToUse.findViewById(R.id.matchup_team_2_summoner);
 
         final MatchUpInfo matchUps = fantasyInfoManager.getCurrWeekMatchUps().get(position);
-        final RosterInfo blueRoster = fantasyInfoManager.getRosterById(matchUps.getBlueTeamId());
+        RosterInfo blueRoster = fantasyInfoManager.getRosterById(matchUps.getBlueTeamId());
         RosterInfo redRoster = fantasyInfoManager.getRosterById(matchUps.getRedTeamId());
         blueTeamName.setText(blueRoster.getName());
         redTeamName.setText(redRoster.getName());
@@ -73,6 +76,9 @@ public class MatchUpAdapter extends BaseAdapter {
 //                WeeklyRoster wr = blueRoster.getWeeklyRosters().get(Long.valueOf(1));
 //                System.out.println(fantasyInfoManager.getPlayerById(wr.getTop()).getName());
 //                System.out.println(fantasyInfoManager.getPlayerById(wr.getJug()).getName());
+                Intent intent = new Intent(context, MatchUpActivity.class);
+                intent.putExtra(Tags.MATCHUP_ID, matchUps.getId());
+                context.startActivity(intent);
             }
         });
         return viewToUse;
