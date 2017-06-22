@@ -1,5 +1,6 @@
 package gordo.fanny.flcs.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -78,5 +79,16 @@ public class WeeklyRoster {
 
     public void setReserve(List<Long> reserve) {
         this.reserve = reserve;
+    }
+
+    public List<Long> getFullRoster() {
+        List<Long> fullRoster = new ArrayList<>();
+        fullRoster.add(top);
+        fullRoster.add(jug);
+        fullRoster.add(mid);
+        fullRoster.add(adc);
+        fullRoster.add(supp);
+
+        return fullRoster;
     }
 }

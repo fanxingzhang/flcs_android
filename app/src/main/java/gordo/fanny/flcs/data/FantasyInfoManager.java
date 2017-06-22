@@ -127,4 +127,8 @@ public class FantasyInfoManager {
     public List<MatchUpInfo> getCurrWeekMatchUps() {
         return getMatchUpsByWeek(currWeek);
     }
+
+    public long getCurrWeek() {
+        return currWeek;
+    }
 }
