@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +69,10 @@ public class RosterAdapter extends BaseAdapter {
 
         TextView playerName = (TextView) returnView.findViewById(R.id.roster_player_name);
         TextView teamName = (TextView) returnView.findViewById(R.id.roster_player_team);
+        ImageView playerPhoto = (ImageView) returnView.findViewById(R.id.roster_player_image);
         playerName.setText(currPlayer.getName());
         teamName.setText(fantasyInfoManager.getTeamById(currPlayer.getProTeamId()).getName());
+        Picasso.with(context).load(currPlayer.getPhotoUrl()).into(playerPhoto);
         return returnView;
     }
 
