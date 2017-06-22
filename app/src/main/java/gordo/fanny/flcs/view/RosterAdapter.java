@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import gordo.fanny.flcs.FLCSApplication;
 import gordo.fanny.flcs.R;
 import gordo.fanny.flcs.data.FantasyInfoManager;
+import gordo.fanny.flcs.data.ProPlayer;
 
 /**
  * Created by fanxing on 6/21/2017.
@@ -57,14 +58,16 @@ public class RosterAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         Long playerId = roster.get(i);
+        ProPlayer currPlayer = fantasyInfoManager.getPlayerById(playerId);
         View returnView = view;
         if (returnView == null) {
             returnView = mInflater.inflate(R.layout.roster_player_row_layout, viewGroup, false);
         }
 
         TextView playerName = (TextView) returnView.findViewById(R.id.roster_player_name);
-        playerName.setText(fantasyInfoManager.getPlayerById(playerId).getName());
-
+        TextView teamName = (TextView) returnView.findViewById(R.id.roster_player_team);
+        playerName.setText(currPlayer.getName());
+        teamName.setText(fantasyInfoManager.getTeamById(currPlayer.getProTeamId()).getName());
         return returnView;
     }
 

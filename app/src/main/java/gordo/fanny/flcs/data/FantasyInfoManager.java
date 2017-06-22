@@ -12,6 +12,7 @@ import gordo.fanny.flcs.services.response.FantasyMatchTeamRoster;
 import gordo.fanny.flcs.services.response.FantasyTeam;
 import gordo.fanny.flcs.services.response.LCSInfo;
 import gordo.fanny.flcs.services.response.LCSPlayers;
+import gordo.fanny.flcs.services.response.LCSTeams;
 import gordo.fanny.flcs.services.response.LeagueInfo;
 
 /**
@@ -24,12 +25,14 @@ public class FantasyInfoManager {
     private Map<Long, RosterInfo> rosters;
     private List<MatchUpInfo> matchUps;
     private Map<Long, ProPlayer> proPlayerMap;
+    private Map<Long, ProTeam> proTeamMap;
     private long currWeek;
 
     public FantasyInfoManager() {
         rosters = new HashMap<>();
         matchUps = new ArrayList<>();
         proPlayerMap = new HashMap<>();
+        proTeamMap = new HashMap<>();
     }
 
     public void setInfo(LeagueInfo info) {
@@ -91,6 +94,17 @@ public class FantasyInfoManager {
 
             proPlayerMap.put(proPlayer.getId(), proPlayer);
         }
+
+        List<LCSTeams> lcsTeamsList = lcsInfo.getProTeams();
+        for (LCSTeams teams : lcsTeamsList) {
+            ProTeam proTeam = new ProTeam();
+            proTeam.setId(teams.getId());
+            proTeam.setRiotId(teams.getRiotId());
+            proTeam.setName(teams.getName());
+            proTeam.setShortName(teams.getShortName());
+
+            proTeamMap.put(proTeam.getId(), proTeam);
+        }
     }
 
     public RosterInfo getRosterById(long id) {
@@ -130,5 +144,9 @@ public class FantasyInfoManager {
 
     public long getCurrWeek() {
         return currWeek;
+    }
+
+    public ProTeam getTeamById(long id) {
+        return proTeamMap.get(id);
     }
 }

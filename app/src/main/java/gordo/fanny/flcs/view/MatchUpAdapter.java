@@ -72,10 +72,6 @@ public class MatchUpAdapter extends BaseAdapter {
         viewToUse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                System.out.println(blueRoster.getSummonerName());
-//                WeeklyRoster wr = blueRoster.getWeeklyRosters().get(Long.valueOf(1));
-//                System.out.println(fantasyInfoManager.getPlayerById(wr.getTop()).getName());
-//                System.out.println(fantasyInfoManager.getPlayerById(wr.getJug()).getName());
                 Intent intent = new Intent(context, MatchUpActivity.class);
                 intent.putExtra(Tags.MATCHUP_ID, matchUps.getId());
                 context.startActivity(intent);
