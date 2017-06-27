@@ -67,7 +67,7 @@ public class FLCSServiceManager {
 
             @Override
             public void onFailure(Call<LCSInfo> call, Throwable t) {
-
+                t.printStackTrace();
             }
         });
     }

@@ -12,6 +12,7 @@ import gordo.fanny.flcs.services.response.FantasyMatchTeamRoster;
 import gordo.fanny.flcs.services.response.FantasyTeam;
 import gordo.fanny.flcs.services.response.LCSInfo;
 import gordo.fanny.flcs.services.response.LCSPlayers;
+import gordo.fanny.flcs.services.response.LCSStats;
 import gordo.fanny.flcs.services.response.LCSTeams;
 import gordo.fanny.flcs.services.response.LeagueInfo;
 
