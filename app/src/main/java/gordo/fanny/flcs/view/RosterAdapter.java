@@ -2,6 +2,7 @@ package gordo.fanny.flcs.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import gordo.fanny.flcs.FLCSApplication;
+import gordo.fanny.flcs.PlayerDetailsActivity;
 import gordo.fanny.flcs.R;
 import gordo.fanny.flcs.data.FantasyInfoManager;
 import gordo.fanny.flcs.data.ProPlayer;
@@ -73,6 +75,15 @@ public class RosterAdapter extends BaseAdapter {
         playerName.setText(currPlayer.getName());
         teamName.setText(fantasyInfoManager.getTeamById(currPlayer.getProTeamId()).getName());
         Picasso.with(context).load(currPlayer.getPhotoUrl()).into(playerPhoto);
+
+        returnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PlayerDetailsActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
         return returnView;
     }
 
