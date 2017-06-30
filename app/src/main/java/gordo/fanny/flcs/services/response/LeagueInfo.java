@@ -12,6 +12,11 @@ import java.util.Map;
 public class LeagueInfo {
 
     private long id;
+
+    public long getId() {
+        return id;
+    }
+
     private String name;
     private long owner;
     private long size;

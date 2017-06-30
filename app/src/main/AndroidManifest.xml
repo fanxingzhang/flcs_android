@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MatchUpActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:label="Match Up"/>
     </application>
 
 </manifest>

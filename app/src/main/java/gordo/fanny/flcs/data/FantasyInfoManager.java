@@ -36,6 +36,13 @@ public class FantasyInfoManager {
         proTeamMap = new HashMap<>();
     }
 
+    public void clear() {
+        rosters.clear();
+        matchUps.clear();
+        proPlayerMap.clear();
+        proTeamMap.clear();
+    }
+
     public void setInfo(LeagueInfo info) {
         currWeek = info.getCurrentWeek();
 
