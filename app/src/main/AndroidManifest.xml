@@ -26,8 +26,7 @@
             android:label="Match Up"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".PlayerDetailsActivity"
-            android:label="Player Detail"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:label="Player Detail" />
     </application>
 
 </manifest>
