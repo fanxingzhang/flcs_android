@@ -6,4 +6,5 @@ package gordo.fanny.flcs;
 
 public class Tags {
     public static final String MATCHUP_ID = "matchup_id";
+    public static final String PLAYER_ID = "player_id";
 }
