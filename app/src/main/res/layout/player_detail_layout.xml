@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:elevation="4dp"
+        android:elevation="6dp"
         android:background="@color/section_background_color"
         android:padding="16dp">
         <ImageView
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Faker"
-                android:textSize="22sp"
+
                 android:textStyle="bold" />
 
             <TextView
@@ -46,9 +46,9 @@
             android:textSize="36sp" />
     </LinearLayout>
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <!--<Spinner-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"/>-->
 
     <include
         layout="@layout/player_stats_detail_layout"/>
