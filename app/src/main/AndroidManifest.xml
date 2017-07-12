@@ -23,8 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MatchUpActivity"
-            android:label="Match Up"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:label="Match Up" />
         <activity android:name=".PlayerDetailsActivity"
             android:label="Player Detail" />
     </application>
