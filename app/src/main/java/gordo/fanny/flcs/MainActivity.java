@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.squareup.otto.Subscribe;
 
@@ -124,5 +125,9 @@ public class MainActivity extends FLCSBaseActivity {
     public void onLCSInfo(LCSInfo lcsInfo) {
         fantasyInfoManager.setLCSInfo(lcsInfo);
         matchUpAdapter.update();
+        String test = fantasyInfoManager.getPlayerMatchStats(1605, 1876).toString();
+        System.out.println("hello world!!!!! ");
+        Log.d("YOLO", test);
+        Log.d("YOLO", "LJVHTDKYTCLCYYKXLCLYTULYV;");
     }
 }

@@ -17,7 +17,7 @@ public class LCSStats {
     public static final int PLAYER_MINION_KILLS = 6;
     public static final int PLAYER_DOUBLE = 7;
     public static final int PLAYER_TRIPLE = 8;
-    public static final int PLAYER_QUADARA = 9;
+    public static final int PLAYER_QUADRA = 9;
     public static final int PLAYER_PENTA = 10;
 
     private List<List<Float>> projectedTeamStats;
