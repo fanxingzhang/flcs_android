@@ -20,6 +20,7 @@ import javax.inject.Inject;
 import gordo.fanny.flcs.FLCSApplication;
 import gordo.fanny.flcs.PlayerDetailsActivity;
 import gordo.fanny.flcs.R;
+import gordo.fanny.flcs.Tags;
 import gordo.fanny.flcs.data.FantasyInfoManager;
 import gordo.fanny.flcs.data.ProPlayer;
 
@@ -61,8 +62,8 @@ public class RosterAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        Long playerId = roster.get(i);
+    public View getView(final int i, View view, ViewGroup viewGroup) {
+        final Long playerId = roster.get(i);
         ProPlayer currPlayer = fantasyInfoManager.getPlayerById(playerId);
         View returnView = view;
         if (returnView == null) {
@@ -80,6 +81,7 @@ public class RosterAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerDetailsActivity.class);
+                intent.putExtra(Tags.PLAYER_ID, playerId);
                 context.startActivity(intent);
             }
         });
