@@ -11,6 +11,7 @@ import gordo.fanny.flcs.services.response.FantasyMatch;
 import gordo.fanny.flcs.services.response.FantasyMatchTeamRoster;
 import gordo.fanny.flcs.services.response.FantasyTeam;
 import gordo.fanny.flcs.services.response.LCSInfo;
+import gordo.fanny.flcs.services.response.LCSMatches;
 import gordo.fanny.flcs.services.response.LCSPlayers;
 import gordo.fanny.flcs.services.response.LCSStats;
 import gordo.fanny.flcs.services.response.LCSTeams;
@@ -28,6 +29,7 @@ public class FantasyInfoManager {
     private Map<Long, ProPlayer> proPlayerMap;
     private Map<Long, ProTeam> proTeamMap;
     private List<List<Float>> actualPlayerStats;
+    private List<LCSMatches> proMatches;
     private long currWeek;
 
     public FantasyInfoManager() {
@@ -92,7 +94,6 @@ public class FantasyInfoManager {
     }
 
     public void setLCSInfo(LCSInfo lcsInfo) {
-        actualPlayerStats = lcsInfo.getLcsStats().getActualPlayerStats();
         List<LCSPlayers> lcsPlayersList = lcsInfo.getProPlayers();
         for (LCSPlayers players : lcsPlayersList) {
             ProPlayer proPlayer = new ProPlayer();
@@ -115,6 +116,10 @@ public class FantasyInfoManager {
 
             proTeamMap.put(proTeam.getId(), proTeam);
         }
+
+        actualPlayerStats = lcsInfo.getLcsStats().getActualPlayerStats();
+
+        this.proMatches = lcsInfo.getProMatches();
     }
 
     public RosterInfo getRosterById(long id) {
@@ -172,5 +177,16 @@ public class FantasyInfoManager {
         }
 
         return returnPlayerMatchStats;
+    }
+
+    public List<LCSMatches> getProMatchesByIdAndWeek(long teamId, long week) {
+        List<LCSMatches> returnList = new ArrayList<>();
+        for (LCSMatches matches : proMatches) {
+            if (matches.getWeek() == week &&
+                    (matches.getBlueTeamId() == teamId || matches.getRedTeamId() == teamId)) {
+                returnList.add(matches);
+            }
+        }
+        return returnList;
     }
 }

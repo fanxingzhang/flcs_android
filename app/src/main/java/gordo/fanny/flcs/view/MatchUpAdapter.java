@@ -38,6 +38,7 @@ public class MatchUpAdapter extends BaseAdapter {
 
     private Context context;
     private static LayoutInflater mInflater;
+    private int weekSelected = 1;
 
     public MatchUpAdapter(Activity mActivity) {
         context = mActivity;
@@ -47,7 +48,7 @@ public class MatchUpAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return fantasyInfoManager.getCurrWeekMatchUps().size();
+        return fantasyInfoManager.getMatchUpsByWeek(weekSelected).size();
     }
 
     @Override
@@ -61,7 +62,7 @@ public class MatchUpAdapter extends BaseAdapter {
         TextView blueSummonerName = (TextView) viewToUse.findViewById(R.id.matchup_team_1_summoner);
         TextView redSummonerName = (TextView) viewToUse.findViewById(R.id.matchup_team_2_summoner);
 
-        final MatchUpInfo matchUps = fantasyInfoManager.getCurrWeekMatchUps().get(position);
+        final MatchUpInfo matchUps = fantasyInfoManager.getMatchUpsByWeek(weekSelected).get(position);
         RosterInfo blueRoster = fantasyInfoManager.getRosterById(matchUps.getBlueTeamId());
         RosterInfo redRoster = fantasyInfoManager.getRosterById(matchUps.getRedTeamId());
         blueTeamName.setText(blueRoster.getName());

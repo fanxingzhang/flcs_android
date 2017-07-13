@@ -40,7 +40,7 @@ public class MatchUpActivity extends FLCSBaseActivity {
 
     private void setLayout() {
         matchUpId = getIntent().getLongExtra(Tags.MATCHUP_ID, 0);
-        weekSelected = fantasyInfoManager.getCurrWeek();
+        weekSelected = 1;
 
         if (matchUpId == 0) {
             return;

@@ -19,6 +19,7 @@ public class PlayerDetailsActivity extends FLCSBaseActivity {
     private ImageView playerPhoto;
 
     private long playerId;
+    private long matchId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

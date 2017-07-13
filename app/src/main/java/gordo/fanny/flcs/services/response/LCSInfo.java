@@ -11,6 +11,7 @@ public class LCSInfo {
     private String seasonSplit;
     private List<LCSTeams> proTeams;
     private List<LCSPlayers> proPlayers;
+    private List<LCSMatches> proMatches;
     private LCSStats stats;
 
     public String getSeasonName() {
@@ -31,5 +32,9 @@ public class LCSInfo {
 
     public LCSStats getLcsStats() {
         return stats;
+    }
+
+    public List<LCSMatches> getProMatches() {
+        return proMatches;
     }
 }

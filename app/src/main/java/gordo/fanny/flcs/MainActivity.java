@@ -126,8 +126,6 @@ public class MainActivity extends FLCSBaseActivity {
         fantasyInfoManager.setLCSInfo(lcsInfo);
         matchUpAdapter.update();
         String test = fantasyInfoManager.getPlayerMatchStats(1605, 1876).toString();
-        System.out.println("hello world!!!!! ");
         Log.d("YOLO", test);
-        Log.d("YOLO", "LJVHTDKYTCLCYYKXLCLYTULYV;");
     }
 }

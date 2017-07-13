@@ -14,11 +14,12 @@ public class LCSStats {
     public static final int PLAYER_MATCH_NUMBER = 3;
     public static final int PLAYER_KILLS = 4;
     public static final int PLAYER_DEATH = 5;
-    public static final int PLAYER_MINION_KILLS = 6;
-    public static final int PLAYER_DOUBLE = 7;
-    public static final int PLAYER_TRIPLE = 8;
-    public static final int PLAYER_QUADRA = 9;
-    public static final int PLAYER_PENTA = 10;
+    public static final int PLYATER_ASSIST = 6;
+    public static final int PLAYER_MINION_KILLS = 7;
+    public static final int PLAYER_DOUBLE = 8;
+    public static final int PLAYER_TRIPLE = 9;
+    public static final int PLAYER_QUADRA = 10;
+    public static final int PLAYER_PENTA = 11;
 
     private List<List<Float>> projectedTeamStats;
     private List<List<Float>> actualTeamStats;
