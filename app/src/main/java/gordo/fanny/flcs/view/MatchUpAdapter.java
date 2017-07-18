@@ -3,6 +3,7 @@ package gordo.fanny.flcs.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,7 @@ public class MatchUpAdapter extends BaseAdapter {
 
     private Context context;
     private static LayoutInflater mInflater;
-    private int weekSelected = 1;
+    private long weekSelected = 1;
 
     public MatchUpAdapter(Activity mActivity) {
         context = mActivity;
@@ -75,6 +76,7 @@ public class MatchUpAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Intent intent = new Intent(context, MatchUpActivity.class);
                 intent.putExtra(Tags.MATCHUP_ID, matchUps.getId());
+                intent.putExtra(Tags.WEEK_SELECTED, weekSelected);
                 context.startActivity(intent);
             }
         });
@@ -91,7 +93,8 @@ public class MatchUpAdapter extends BaseAdapter {
         return null;
     }
 
-    public void update() {
+    public void update(long week) {
+        weekSelected = week;
         notifyDataSetChanged();
     }
 }

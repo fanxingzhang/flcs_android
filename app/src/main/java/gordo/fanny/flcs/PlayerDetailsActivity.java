@@ -30,7 +30,7 @@ public class PlayerDetailsActivity extends FLCSBaseActivity {
 
     private long playerId;
     private ProPlayer player;
-    private long week = 1;
+    private long week;
     private List<LCSMatches> matches;
 
     @Override
@@ -46,6 +46,7 @@ public class PlayerDetailsActivity extends FLCSBaseActivity {
         statsList = (LinearLayout) findViewById(R.id.match_stats_list);
 
         playerId = getIntent().getLongExtra(Tags.PLAYER_ID, -1);
+        week = getIntent().getLongExtra(Tags.WEEK_SELECTED, -1);
         player = fantasyInfoManager.getPlayerById(playerId);
         matches = fantasyInfoManager.getProMatchesByIdAndWeek(player.getProTeamId(), week);
 

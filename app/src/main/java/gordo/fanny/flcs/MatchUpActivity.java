@@ -40,7 +40,7 @@ public class MatchUpActivity extends FLCSBaseActivity {
 
     private void setLayout() {
         matchUpId = getIntent().getLongExtra(Tags.MATCHUP_ID, 0);
-        weekSelected = 1;
+        weekSelected = getIntent().getLongExtra(Tags.WEEK_SELECTED, -1);
 
         if (matchUpId == 0) {
             return;
@@ -78,5 +78,6 @@ public class MatchUpActivity extends FLCSBaseActivity {
         RosterInfo rosterInfo = team == 0 ? blueRoster : redRoster;
         WeeklyRoster weeklyRoster = rosterInfo.getWeeklyRosters().get(weekSelected);
         rosterAdapter.setRoster(weeklyRoster.getFullRoster());
+        rosterAdapter.setWeekSelected(weekSelected);
     }
 }

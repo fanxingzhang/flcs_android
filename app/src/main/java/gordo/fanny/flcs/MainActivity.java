@@ -19,6 +19,7 @@ import android.util.Log;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import gordo.fanny.flcs.services.request.LCSRequest;
 import gordo.fanny.flcs.services.request.LeagueRequest;
@@ -33,7 +34,10 @@ public class MainActivity extends FLCSBaseActivity {
     private MatchUpAdapter matchUpAdapter;
     private AlertDialog.Builder alertDialogBuilder;
     private Spinner leagueSpinner;
+    private Spinner weekSpinner;
     private ArrayAdapter spinnerAdapter;
+    private ArrayAdapter weekSpinnerAdapter;
+    private long selectedWeek;
 
 
     @Override
@@ -45,8 +49,11 @@ public class MainActivity extends FLCSBaseActivity {
         setSupportActionBar(toolbar);
 
         leagueSpinner = (Spinner) findViewById(R.id.league_spinner);
+        weekSpinner = (Spinner) findViewById(R.id.week_spinner);
         spinnerAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1);
+        weekSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         leagueSpinner.setAdapter(spinnerAdapter);
+        weekSpinner.setAdapter(weekSpinnerAdapter);
         leagueSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -63,6 +70,19 @@ public class MainActivity extends FLCSBaseActivity {
             }
         });
         updateSpinner();
+
+        weekSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedWeek = position + 1;
+                matchUpAdapter.update(selectedWeek);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         matchupListVivew = (ListView) findViewById(R.id.match_up_list_view);
@@ -81,7 +101,6 @@ public class MainActivity extends FLCSBaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add_league:
-                //bus.post(new LeagueRequest(1191481));
                 alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Enter League ID");
                 LayoutInflater layoutInflater = this.getLayoutInflater();
@@ -111,6 +130,16 @@ public class MainActivity extends FLCSBaseActivity {
         spinnerAdapter.notifyDataSetChanged();
     }
 
+    private void updateWeekSpinner() {
+        weekSpinnerAdapter.clear();
+        int numWeeks = (int)fantasyInfoManager.getCurrWeek();
+        String[] weeks = new String[numWeeks];
+        for (int i = 0; i < numWeeks; i++) {
+            weeks[i] = "Week " + (i + 1);
+        }
+        weekSpinnerAdapter.addAll(weeks);
+    }
+
     @Subscribe
     public void onLeagueInfo(LeagueInfo leagueInfo) {
         fantasyInfoManager.clear();
@@ -119,13 +148,12 @@ public class MainActivity extends FLCSBaseActivity {
 
         SharedPref.addLeagueId(leagueInfo.getId(), MainActivity.this, leagueInfo.getName());
         updateSpinner();
+        updateWeekSpinner();
     }
 
     @Subscribe
     public void onLCSInfo(LCSInfo lcsInfo) {
         fantasyInfoManager.setLCSInfo(lcsInfo);
-        matchUpAdapter.update();
-        String test = fantasyInfoManager.getPlayerMatchStats(1605, 1876).toString();
-        Log.d("YOLO", test);
+        matchUpAdapter.update(selectedWeek);
     }
 }

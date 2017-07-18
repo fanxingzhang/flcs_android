@@ -37,6 +37,7 @@ public class RosterAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 
     private List<Long> roster;
+    private long weekSelected;
 
     public RosterAdapter(Activity mActivity) {
         context = mActivity;
@@ -82,6 +83,7 @@ public class RosterAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, PlayerDetailsActivity.class);
                 intent.putExtra(Tags.PLAYER_ID, playerId);
+                intent.putExtra(Tags.WEEK_SELECTED, weekSelected);
                 context.startActivity(intent);
             }
         });
@@ -93,5 +95,9 @@ public class RosterAdapter extends BaseAdapter {
         this.roster.clear();
         this.roster.addAll(roster);
         notifyDataSetChanged();
+    }
+
+    public void setWeekSelected(long weekSelected) {
+        this.weekSelected = weekSelected;
     }
 }
