@@ -117,8 +117,7 @@ public class FantasyInfoManager {
             proTeamMap.put(proTeam.getId(), proTeam);
         }
 
-        actualPlayerStats = lcsInfo.getLcsStats().getActualPlayerStats();
-
+        this.actualPlayerStats = lcsInfo.getLcsStats().getActualPlayerStats();
         this.proMatches = lcsInfo.getProMatches();
     }
 
@@ -165,14 +164,13 @@ public class FantasyInfoManager {
         return proTeamMap.get(id);
     }
 
-    public List<Float> getPlayerMatchStats(long playerId, long matchId) {
-        List<Float> returnPlayerMatchStats = new ArrayList<>();
+    public List<List<Float>> getPlayerMatchStats(long playerId, long matchId) {
+        List<List<Float>> returnPlayerMatchStats = new ArrayList<>();
 
         for (List<Float> playerStats : actualPlayerStats) {
             if ((playerId == playerStats.get(LCSStats.PLAYER_PLAYER_ID_INDEX))
                     && (matchId == playerStats.get(LCSStats.PLAYER_MATCH_ID))) {
-                returnPlayerMatchStats = playerStats;
-                break;
+                returnPlayerMatchStats.add(playerStats);
             }
         }
 
@@ -182,8 +180,7 @@ public class FantasyInfoManager {
     public List<LCSMatches> getProMatchesByIdAndWeek(long teamId, long week) {
         List<LCSMatches> returnList = new ArrayList<>();
         for (LCSMatches matches : proMatches) {
-            if (matches.getWeek() == week &&
-                    (matches.getBlueTeamId() == teamId || matches.getRedTeamId() == teamId)) {
+            if (matches.getWeek() == week && (matches.getBlueTeamId() == teamId || matches.getRedTeamId() == teamId)) {
                 returnList.add(matches);
             }
         }

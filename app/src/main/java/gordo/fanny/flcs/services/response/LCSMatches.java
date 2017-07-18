@@ -5,7 +5,7 @@ package gordo.fanny.flcs.services.response;
  */
 
 public class LCSMatches {
-    private long matchId;
+    private long id;
     private long week;
     private long blueTeamId;
     private long redTeamId;
@@ -15,7 +15,7 @@ public class LCSMatches {
     private int blueTeamMutiplier;
 
     public long getMatchId() {
-        return matchId;
+        return id;
     }
 
     public long getWeek() {
