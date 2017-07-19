@@ -77,7 +77,6 @@ public class MatchUpActivity extends FLCSBaseActivity {
     private void setRosterListView(int team) {
         RosterInfo rosterInfo = team == 0 ? blueRoster : redRoster;
         WeeklyRoster weeklyRoster = rosterInfo.getWeeklyRosters().get(weekSelected);
-        rosterAdapter.setRoster(weeklyRoster.getFullRoster());
-        rosterAdapter.setWeekSelected(weekSelected);
+        rosterAdapter.setRoster(weeklyRoster.getFullRoster(), weekSelected);
     }
 }

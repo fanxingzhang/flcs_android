@@ -88,7 +88,8 @@ public class WeeklyRoster {
         fullRoster.add(mid);
         fullRoster.add(adc);
         fullRoster.add(supp);
-
+        fullRoster.add(team);
+        fullRoster.add(flex);
         return fullRoster;
     }
 }

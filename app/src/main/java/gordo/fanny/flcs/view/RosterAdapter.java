@@ -23,6 +23,7 @@ import gordo.fanny.flcs.R;
 import gordo.fanny.flcs.Tags;
 import gordo.fanny.flcs.data.FantasyInfoManager;
 import gordo.fanny.flcs.data.ProPlayer;
+import gordo.fanny.flcs.data.ProTeam;
 
 /**
  * Created by fanxing on 6/21/2017.
@@ -64,40 +65,53 @@ public class RosterAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
-        final Long playerId = roster.get(i);
-        ProPlayer currPlayer = fantasyInfoManager.getPlayerById(playerId);
         View returnView = view;
         if (returnView == null) {
             returnView = mInflater.inflate(R.layout.roster_player_row_layout, viewGroup, false);
         }
-
         TextView playerName = (TextView) returnView.findViewById(R.id.roster_player_name);
         TextView teamName = (TextView) returnView.findViewById(R.id.roster_player_team);
         ImageView playerPhoto = (ImageView) returnView.findViewById(R.id.roster_player_image);
-        playerName.setText(currPlayer.getName());
-        teamName.setText(fantasyInfoManager.getTeamById(currPlayer.getProTeamId()).getName());
-        Picasso.with(context).load(currPlayer.getPhotoUrl()).into(playerPhoto);
 
-        returnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, PlayerDetailsActivity.class);
-                intent.putExtra(Tags.PLAYER_ID, playerId);
-                intent.putExtra(Tags.WEEK_SELECTED, weekSelected);
-                context.startActivity(intent);
-            }
-        });
+        final Long playerId = roster.get(i);
+        ProPlayer currPlayer = fantasyInfoManager.getPlayerById(playerId);
+        if (currPlayer != null) {
+            playerName.setText(currPlayer.getName());
+            teamName.setText(fantasyInfoManager.getTeamById(currPlayer.getProTeamId()).getName());
+            Picasso.with(context).load(currPlayer.getPhotoUrl()).into(playerPhoto);
+
+            returnView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, PlayerDetailsActivity.class);
+                    intent.putExtra(Tags.PLAYER_ID, playerId);
+                    intent.putExtra(Tags.WEEK_SELECTED, weekSelected);
+                    context.startActivity(intent);
+                }
+            });
+        }
+        else {
+            ProTeam proTeam = fantasyInfoManager.getTeamById(playerId);
+            System.out.println(playerId);
+            playerName.setText(proTeam.getName());
+            teamName.setText("Team");
+            Picasso.with(context).load(Tags.TEAM_PHOTO_URL.replace("@", "" + proTeam.getRiotId())).into(playerPhoto);
+
+            returnView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
 
         return returnView;
     }
 
-    public void setRoster(List<Long> roster) {
+    public void setRoster(List<Long> roster, long weekSelected) {
         this.roster.clear();
         this.roster.addAll(roster);
-        notifyDataSetChanged();
-    }
-
-    public void setWeekSelected(long weekSelected) {
         this.weekSelected = weekSelected;
+        notifyDataSetChanged();
     }
 }

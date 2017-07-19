@@ -81,12 +81,16 @@ public class FantasyInfoManager {
             blueWeeklyRoster.setMid(fantasyBlueRoster.getMID_LANE().get(0).getTargetId());
             blueWeeklyRoster.setAdc(fantasyBlueRoster.getAD_CARRY().get(0).getTargetId());
             blueWeeklyRoster.setSupp(fantasyBlueRoster.getSUPPORT().get(0).getTargetId());
+            blueWeeklyRoster.setTeam(fantasyBlueRoster.getTEAM().get(0).getTargetId());
+            blueWeeklyRoster.setFlex(fantasyBlueRoster.getFLEX().get(0).getTargetId());
 
             redWeeklyRoster.setTop(fantasyRedRoster.getTOP_LANE().get(0).getTargetId());
             redWeeklyRoster.setJug(fantasyRedRoster.getJUNGLER().get(0).getTargetId());
             redWeeklyRoster.setMid(fantasyRedRoster.getMID_LANE().get(0).getTargetId());
             redWeeklyRoster.setAdc(fantasyRedRoster.getAD_CARRY().get(0).getTargetId());
             redWeeklyRoster.setSupp(fantasyRedRoster.getSUPPORT().get(0).getTargetId());
+            redWeeklyRoster.setTeam(fantasyRedRoster.getTEAM().get(0).getTargetId());
+            redWeeklyRoster.setFlex(fantasyRedRoster.getFLEX().get(0).getTargetId());
 
             blueRoster.addWeeklyRoster(fm.getWeek(), blueWeeklyRoster);
             redRoster.addWeeklyRoster(fm.getWeek(), redWeeklyRoster);
