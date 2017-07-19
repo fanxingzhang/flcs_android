@@ -117,6 +117,8 @@ public class MainActivity extends FLCSBaseActivity {
                 alertDialogBuilder.setNegativeButton("Cancel", null);
                 alertDialogBuilder.create().show();
                 break;
+            case R.id.action_league_stats:
+                break;
             default:
                 break;
         }

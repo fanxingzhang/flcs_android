@@ -6,7 +6,12 @@
         android:id="@+id/action_add_league"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/ic_add_white_24dp"
         android:title="add"/>
-
+    <item
+        android:id="@+id/action_league_stats"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_show_chart_white_24dp"
+        android:title="stats"/>
 </menu>
