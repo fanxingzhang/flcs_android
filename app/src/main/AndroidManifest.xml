@@ -2,16 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gordo.fanny.flcs">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".FLCSApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".FLCSApplication">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -22,10 +22,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MatchUpActivity"
+        <activity
+            android:name=".MatchUpActivity"
             android:label="Match Up" />
-        <activity android:name=".PlayerDetailsActivity"
+        <activity
+            android:name=".PlayerDetailsActivity"
             android:label="Player Detail" />
+        <activity
+            android:name=".LeagueStatsActivity"
+            android:label="@string/title_activity_league_stats"></activity>
     </application>
 
 </manifest>

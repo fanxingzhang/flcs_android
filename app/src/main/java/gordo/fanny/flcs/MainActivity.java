@@ -1,6 +1,7 @@
 package gordo.fanny.flcs;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -118,6 +119,8 @@ public class MainActivity extends FLCSBaseActivity {
                 alertDialogBuilder.create().show();
                 break;
             case R.id.action_league_stats:
+                Intent intent = new Intent(this, LeagueStatsActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
