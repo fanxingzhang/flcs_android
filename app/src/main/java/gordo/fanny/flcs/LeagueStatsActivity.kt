@@ -70,7 +70,9 @@ class LeagueStatsActivity : FLCSBaseActivity(), SearchView.OnQueryTextListener{
 
     override fun onQueryTextChange(newText: String?): Boolean {
         playersListNew = playersList!!.filter {
-            it.name.contains(newText!!, true)
+            it.name.contains(newText!!, true) ||
+                    fantasyInfoManager.getTeamById(it.proTeamId).name.contains(newText!!, true) ||
+                    fantasyInfoManager.getTeamById(it.proTeamId).shortName.contains(newText!!, true)
         }
         setPlayersList()
         return true
