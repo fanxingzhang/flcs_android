@@ -3,11 +3,11 @@ package gordo.fanny.flcs
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.view.MenuItemCompat
+import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SearchView
 import gordo.fanny.flcs.data.ProPlayer
 import gordo.fanny.flcs.data.ProTeam
 import gordo.fanny.flcs.view.RosterStatsAdapter
@@ -17,6 +17,8 @@ class LeagueStatsActivity : FLCSBaseActivity(), SearchView.OnQueryTextListener{
 
     private var playersList : List<ProPlayer>? = null
     private var teamsList : List<ProTeam>? =null
+    private var playersListNew : List<ProPlayer>? = null
+    private var teamsListNew : List<ProTeam>? =null
     private var weekAdapter : ArrayAdapter<String>? = null
     private var rosterAdapter : RosterStatsAdapter? = null
     private var selectedWeek = 1
@@ -27,6 +29,8 @@ class LeagueStatsActivity : FLCSBaseActivity(), SearchView.OnQueryTextListener{
 
         playersList = fantasyInfoManager.allPlayers
         teamsList = fantasyInfoManager.allTeams
+        playersListNew = ArrayList(playersList)
+        teamsListNew = ArrayList(teamsList)
         rosterAdapter = RosterStatsAdapter(this)
         stats_list.adapter = rosterAdapter
 
@@ -65,6 +69,10 @@ class LeagueStatsActivity : FLCSBaseActivity(), SearchView.OnQueryTextListener{
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
+        playersListNew = playersList!!.filter {
+            it.name.contains(newText!!, true)
+        }
+        setPlayersList()
         return true
     }
 
@@ -74,7 +82,7 @@ class LeagueStatsActivity : FLCSBaseActivity(), SearchView.OnQueryTextListener{
 
     private fun setPlayersList() {
         rosterAdapter!!.setIsPlayer(true)
-        rosterAdapter!!.setPlayerList(playersList!!)
+        rosterAdapter!!.setPlayerList(playersListNew!!)
     }
 
     private fun setTeamList() {
