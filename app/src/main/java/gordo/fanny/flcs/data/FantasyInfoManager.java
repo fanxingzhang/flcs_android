@@ -190,4 +190,8 @@ public class FantasyInfoManager {
         }
         return returnList;
     }
+
+    public List<ProPlayer> getAllPlayers() {
+        return new ArrayList<>(proPlayerMap.values());
+    }
 }

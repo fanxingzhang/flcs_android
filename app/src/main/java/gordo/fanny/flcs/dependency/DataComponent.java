@@ -10,6 +10,7 @@ import gordo.fanny.flcs.FLCSBaseActivity;
 import gordo.fanny.flcs.services.FLCSServiceManager;
 import gordo.fanny.flcs.view.MatchUpAdapter;
 import gordo.fanny.flcs.view.RosterAdapter;
+import gordo.fanny.flcs.view.RosterStatsAdapter;
 
 /**
  * Created by rww306 on 2017-06-14.
@@ -25,4 +26,5 @@ public interface DataComponent {
     void inject(FLCSServiceManager flcsServiceManager);
     void inject(MatchUpAdapter matchUpAdapter);
     void inject(RosterAdapter rosterAdapter);
+    void inject(RosterStatsAdapter rosterStatsAdapter);
 }

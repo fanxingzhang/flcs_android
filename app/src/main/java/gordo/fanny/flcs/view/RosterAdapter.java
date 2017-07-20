@@ -41,6 +41,7 @@ public class RosterAdapter extends BaseAdapter {
     private long weekSelected;
 
     public RosterAdapter(Activity mActivity) {
+        super();
         context = mActivity;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         FLCSApplication.getApp().getDataComponent().inject(this);
