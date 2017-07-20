@@ -29,8 +29,8 @@ class LeagueStatsActivity : FLCSBaseActivity(), SearchView.OnQueryTextListener{
 
         playersList = fantasyInfoManager.allPlayers
         teamsList = fantasyInfoManager.allTeams
-        playersListNew = ArrayList(playersList)
-        teamsListNew = ArrayList(teamsList)
+        playersListNew = ArrayList(playersList).sortedBy { it.name.toLowerCase() }
+        teamsListNew = ArrayList(teamsList).sortedBy { it.name.toLowerCase() }
         rosterAdapter = RosterStatsAdapter(this)
         stats_list.adapter = rosterAdapter
 
@@ -89,7 +89,7 @@ class LeagueStatsActivity : FLCSBaseActivity(), SearchView.OnQueryTextListener{
 
     private fun setTeamList() {
         rosterAdapter!!.setIsPlayer(false)
-        rosterAdapter!!.setTeamList(teamsList!!)
+        rosterAdapter!!.setTeamList(teamsListNew!!)
     }
 
     private fun updateWeekSpinner() {
