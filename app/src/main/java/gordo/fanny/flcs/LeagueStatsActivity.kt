@@ -38,7 +38,7 @@ class LeagueStatsActivity : FLCSBaseActivity() {
         })
 
         weekAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
-        week_spinner.adapter = weekAdapter
+        week_spinner.adapter = weekAdapter!!
         week_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedWeek = position + 1
