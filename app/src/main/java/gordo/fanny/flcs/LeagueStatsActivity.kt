@@ -2,15 +2,18 @@ package gordo.fanny.flcs
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.view.MenuItemCompat
+import android.view.Menu
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.SearchView
 import gordo.fanny.flcs.data.ProPlayer
 import gordo.fanny.flcs.data.ProTeam
 import gordo.fanny.flcs.view.RosterStatsAdapter
 import kotlinx.android.synthetic.main.activity_league_stats.*
 
-class LeagueStatsActivity : FLCSBaseActivity() {
+class LeagueStatsActivity : FLCSBaseActivity(), SearchView.OnQueryTextListener{
 
     private var playersList : List<ProPlayer>? = null
     private var teamsList : List<ProTeam>? =null
@@ -52,6 +55,21 @@ class LeagueStatsActivity : FLCSBaseActivity() {
         }
         updateWeekSpinner()
         setPlayersList()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_stats, menu)
+        val searchView : SearchView = MenuItemCompat.getActionView(menu!!.findItem(R.id.action_search)) as SearchView
+        searchView.setOnQueryTextListener(this)
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
     }
 
     private fun setPlayersList() {
