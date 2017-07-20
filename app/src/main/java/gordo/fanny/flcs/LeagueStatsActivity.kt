@@ -6,12 +6,14 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import gordo.fanny.flcs.data.ProPlayer
+import gordo.fanny.flcs.data.ProTeam
 import gordo.fanny.flcs.view.RosterStatsAdapter
 import kotlinx.android.synthetic.main.activity_league_stats.*
 
 class LeagueStatsActivity : FLCSBaseActivity() {
 
     private var playersList : List<ProPlayer>? = null
+    private var teamsList : List<ProTeam>? =null
     private var weekAdapter : ArrayAdapter<String>? = null
     private var rosterAdapter : RosterStatsAdapter? = null
     private var selectedWeek = 1
@@ -21,6 +23,7 @@ class LeagueStatsActivity : FLCSBaseActivity() {
         setContentView(R.layout.activity_league_stats)
 
         playersList = fantasyInfoManager.allPlayers
+        teamsList = fantasyInfoManager.allTeams
         rosterAdapter = RosterStatsAdapter(this)
         stats_list.adapter = rosterAdapter
 
@@ -31,6 +34,7 @@ class LeagueStatsActivity : FLCSBaseActivity() {
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.team -> {
+                    setTeamList()
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -47,10 +51,17 @@ class LeagueStatsActivity : FLCSBaseActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
         updateWeekSpinner()
+        setPlayersList()
     }
 
     private fun setPlayersList() {
+        rosterAdapter!!.setIsPlayer(true)
         rosterAdapter!!.setPlayerList(playersList!!)
+    }
+
+    private fun setTeamList() {
+        rosterAdapter!!.setIsPlayer(false)
+        rosterAdapter!!.setTeamList(teamsList!!)
     }
 
     private fun updateWeekSpinner() {

@@ -194,4 +194,8 @@ public class FantasyInfoManager {
     public List<ProPlayer> getAllPlayers() {
         return new ArrayList<>(proPlayerMap.values());
     }
+
+    public List<ProTeam> getAllTeams() {
+        return new ArrayList<>(proTeamMap.values());
+    }
 }

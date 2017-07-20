@@ -46,7 +46,9 @@ public class FLCSServiceManager {
         call.enqueue(new Callback<LeagueInfo>() {
             @Override
             public void onResponse(Call<LeagueInfo> call, Response<LeagueInfo> response) {
-                bus.post(response.body());
+                if (response.body() != null) {
+                    bus.post(response.body());
+                }
             }
 
             @Override
@@ -62,7 +64,9 @@ public class FLCSServiceManager {
         call.enqueue(new Callback<LCSInfo>() {
             @Override
             public void onResponse(Call<LCSInfo> call, Response<LCSInfo> response) {
-                bus.post(response.body());
+                if (response.body() != null) {
+                    bus.post(response.body());
+                }
             }
 
             @Override
