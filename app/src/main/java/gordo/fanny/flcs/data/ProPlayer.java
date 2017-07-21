@@ -1,5 +1,8 @@
 package gordo.fanny.flcs.data;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by rww306 on 2017-06-21.
  */
@@ -10,6 +13,15 @@ public class ProPlayer {
     private String name;
     private String photoUrl;
     private long proTeamId;
+    private Map<String, List<Double>> trendsByWeek;
+
+    public Map<String, List<Double>> getTrendsByWeek() {
+        return trendsByWeek;
+    }
+
+    public void setTrendsByWeek(Map<String, List<Double>> trendsByWeek) {
+        this.trendsByWeek = trendsByWeek;
+    }
 
     public long getId() {
         return id;

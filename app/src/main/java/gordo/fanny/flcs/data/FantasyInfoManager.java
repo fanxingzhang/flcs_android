@@ -106,6 +106,7 @@ public class FantasyInfoManager {
             proPlayer.setPhotoUrl(players.getPhotoUrl());
             proPlayer.setProTeamId(players.getProTeamId());
             proPlayer.setRiotId(players.getRiotId());
+            proPlayer.setTrendsByWeek(players.getTrendsByWeek());
 
             proPlayerMap.put(proPlayer.getId(), proPlayer);
         }

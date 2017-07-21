@@ -26,6 +26,7 @@ public class PlayerDetailsActivity extends FLCSBaseActivity {
     private ImageView playerPhoto;
     private TextView playerName;
     private TextView teamName;
+    private  TextView ownerPercentage;
     private LinearLayout statsList;
 
     private long playerId;
@@ -44,6 +45,7 @@ public class PlayerDetailsActivity extends FLCSBaseActivity {
         playerName = (TextView)findViewById(R.id.roster_player_name);
         teamName = (TextView)findViewById(R.id.roster_player_team);
         statsList = (LinearLayout) findViewById(R.id.match_stats_list);
+        ownerPercentage = (TextView) findViewById(R.id.owner_percentage);
 
         playerId = getIntent().getLongExtra(Tags.PLAYER_ID, -1);
         week = getIntent().getLongExtra(Tags.WEEK_SELECTED, -1);
@@ -53,6 +55,7 @@ public class PlayerDetailsActivity extends FLCSBaseActivity {
         playerName.setText(player.getName());
         teamName.setText(fantasyInfoManager.getTeamById(player.getProTeamId()).getName());
         Picasso.with(this).load(fantasyInfoManager.getPlayerById(playerId).getPhotoUrl()).into(playerPhoto);
+        ownerPercentage.setText(player.getTrendsByWeek().get("" + week).get(0).toString());
 
         statsList.removeAllViews();
         for (LCSMatches lcsMatches : matches) {

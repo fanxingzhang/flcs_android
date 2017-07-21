@@ -1,12 +1,16 @@
 package gordo.fanny.flcs.view
 
 import android.app.Activity
+import android.content.Intent
+import android.nfc.Tag
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import butterknife.OnClick
 import com.squareup.picasso.Picasso
 import gordo.fanny.flcs.FLCSApplication
+import gordo.fanny.flcs.PlayerDetailsActivity
 import gordo.fanny.flcs.R
 import gordo.fanny.flcs.Tags
 import gordo.fanny.flcs.data.FantasyInfoManager
@@ -61,6 +65,13 @@ class RosterStatsAdapter(mActivity: Activity) : BaseAdapter() {
             view!!.roster_player_name.setText(proPlayer.name)
             Picasso.with(mActivity).load(proPlayer.photoUrl).into(view!!.roster_player_image)
             view!!.roster_player_team.setText(fantasyInfoManager.getTeamById(proPlayer.proTeamId).name)
+
+            view!!.setOnClickListener {
+                val intent = Intent(mActivity, PlayerDetailsActivity::class.java)
+                intent.putExtra(Tags.PLAYER_ID, proPlayer.id)
+                intent.putExtra(Tags.WEEK_SELECTED, week)
+                mActivity!!.startActivity(intent)
+            }
         }
         else {
             val proTeam = teams!![position]
@@ -86,5 +97,9 @@ class RosterStatsAdapter(mActivity: Activity) : BaseAdapter() {
 
     public fun setIsPlayer(isPlayer : Boolean) {
         this.isPlayer = isPlayer
+    }
+
+    public fun setWeek(w : Long) {
+        this.week = w
     }
 }

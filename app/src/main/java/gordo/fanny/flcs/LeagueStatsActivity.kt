@@ -21,7 +21,7 @@ class LeagueStatsActivity : FLCSBaseActivity(), SearchView.OnQueryTextListener{
     private var teamsListNew : List<ProTeam>? =null
     private var weekAdapter : ArrayAdapter<String>? = null
     private var rosterAdapter : RosterStatsAdapter? = null
-    private var selectedWeek = 1
+    private var selectedWeek : Long = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +52,8 @@ class LeagueStatsActivity : FLCSBaseActivity(), SearchView.OnQueryTextListener{
         week_spinner.adapter = weekAdapter!!
         week_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedWeek = position + 1
+                selectedWeek = position.toLong() + 1
+                rosterAdapter!!.setWeek(selectedWeek)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -84,6 +85,7 @@ class LeagueStatsActivity : FLCSBaseActivity(), SearchView.OnQueryTextListener{
 
     private fun setPlayersList() {
         rosterAdapter!!.setIsPlayer(true)
+        rosterAdapter!!.setWeek(selectedWeek)
         rosterAdapter!!.setPlayerList(playersListNew!!)
     }
 
