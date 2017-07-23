@@ -29,6 +29,7 @@ public class FantasyInfoManager {
     private Map<Long, ProPlayer> proPlayerMap;
     private Map<Long, ProTeam> proTeamMap;
     private List<List<Float>> actualPlayerStats;
+    private List<List<Float>> actualTeamStats;
     private List<LCSMatches> proMatches;
     private long currWeek;
 
@@ -123,6 +124,7 @@ public class FantasyInfoManager {
         }
 
         this.actualPlayerStats = lcsInfo.getLcsStats().getActualPlayerStats();
+        this.actualTeamStats = lcsInfo.getLcsStats().getActualTeamStats();
         this.proMatches = lcsInfo.getProMatches();
     }
 
@@ -180,6 +182,18 @@ public class FantasyInfoManager {
         }
 
         return returnPlayerMatchStats;
+    }
+
+    public List<List<Float>> getTeamMatchStats(long teamId, long matchId) {
+        List<List<Float>> returnTeamMatchStats = new ArrayList<>();
+
+        for (List<Float> teamStats : actualTeamStats) {
+            if ((teamId == teamStats.get(0)) && (matchId == teamStats.get(1))) {
+                returnTeamMatchStats.add(teamStats);
+            }
+        }
+
+        return returnTeamMatchStats;
     }
 
     public List<LCSMatches> getProMatchesByIdAndWeek(long teamId, long week) {
